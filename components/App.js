@@ -5,26 +5,41 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 class Widget extends Component {
-  componentWillMount(){
+  constructor(props) {
+    super(props);
+    this.state = {
+      message: props.message
+    }
+  }
+
+
+  componentWillMount() {
     console.log('componentWillMount')
   }
 
-  componentDidMount(){
+  componentDidMount() {
     console.log('componentDidMount')
   }
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     console.log('componentDidUpdate')
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     console.log('componentDidUnmount')
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (+nextProps.message < +this.state.message) {
+      return;
+    }
+    this.setState({ message: nextProps.message });
   }
 
   render() {
     return (
       <div>
-        {this.props.children}
+        <div>Hi {this.props.target} {this.state.message}</div>
         <input onChange={this.props.handlerUpdate} />
       </div>
     );
@@ -33,8 +48,9 @@ class Widget extends Component {
 
 
 Widget.propTypes = {
-  handlerUpdate: React.PropTypes.func.isRequired,
-  children: React.PropTypes.node.isRequired
+  target: React.PropTypes.string.isRequired,
+  message: React.PropTypes.string.isRequired,
+  handlerUpdate: React.PropTypes.func.isRequired
 };
 
 Widget.defaultProps = {
@@ -51,6 +67,10 @@ class App extends Component {
     this.update = this.update.bind(this);
   }
 
+  shouldComponentUpdate(nextProps, nextState){
+    return nextState.text !== this.state.text;
+  }
+
   update(e) {
     console.log();
     this.setState({
@@ -60,15 +80,17 @@ class App extends Component {
   }
 
   render() {
-    if (this.state.text === 'die'){
+    if (this.state.text === 'die') {
       return (<div ref="widget">whatever you wish</div>);
     }
 
     return (
       <div ref="widget">
-        <Widget handlerUpdate={this.update} >
-          <div>Hi {this.props.target} {this.state.text}</div>
-        </Widget>
+        <Widget
+          target={this.props.target}
+          message={this.state.text}
+          handlerUpdate={this.update}
+        />
         <div>{this.state.width}</div>
       </div>
     );
