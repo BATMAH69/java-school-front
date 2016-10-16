@@ -22,8 +22,12 @@ import React from 'react';
 // }
 
 // arrow
-const App = () => (
-  <div>Hi World</div>
+const App = ({ target }) => (
+  <div>Hi {target}</div>
 );
+
+App.propTypes = {
+  target: React.PropTypes.string.isRequired
+};
 
 export default App;
