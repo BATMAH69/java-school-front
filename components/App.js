@@ -4,12 +4,33 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-const Widget = ({ handlerUpdate, children }) => (
-  <div>
-    {children}
-    <input onChange={handlerUpdate} />
-  </div>
-);
+class Widget extends Component {
+  componentWillMount(){
+    console.log('componentWillMount')
+  }
+
+  componentDidMount(){
+    console.log('componentDidMount')
+  }
+
+  componentDidUpdate(){
+    console.log('componentDidUpdate')
+  }
+
+  componentWillUnmount(){
+    console.log('componentDidUnmount')
+  }
+
+  render() {
+    return (
+      <div>
+        {this.props.children}
+        <input onChange={this.props.handlerUpdate} />
+      </div>
+    );
+  }
+}
+
 
 Widget.propTypes = {
   handlerUpdate: React.PropTypes.func.isRequired,
@@ -39,11 +60,13 @@ class App extends Component {
   }
 
   render() {
+    if (this.state.text === 'die'){
+      return (<div ref="widget">whatever you wish</div>);
+    }
+
     return (
-      <div ref="widget" style={{ display: 'inline-block' }}>
-        <Widget
-          handlerUpdate={this.update}
-        >
+      <div ref="widget">
+        <Widget handlerUpdate={this.update} >
           <div>Hi {this.props.target} {this.state.text}</div>
         </Widget>
         <div>{this.state.width}</div>
