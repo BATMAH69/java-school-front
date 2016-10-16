@@ -36,14 +36,13 @@ Widget.defaultProps = {
 
 function greenHOC(WrappedComponent) {
   return (props) => (
-    <div style={{backgroundColor: 'green'}}>
+    <div style={{backgroundColor: props.background}}>
       <WrappedComponent {...props}/>
     </div>
   )
 }
 
 Widget = greenHOC(Widget);
-
 
 class App extends Component {
   constructor(props) {
@@ -67,14 +66,20 @@ class App extends Component {
     if (this.state.text === 'die') {
       return (<div ref="widget">whatever you wish</div>);
     }
-
+    const colors = ['tomato','lightgreen','deepskyblue'];
     return (
       <div ref="widget">
-        <Widget
-          target={this.props.target}
-          message={this.state.text}
-          handlerUpdate={this.update}
-        />
+        {
+          colors.map((item) => (
+            <Widget
+              key={item}
+              background={item}
+              target={this.props.target}
+              message={this.state.text}
+              handlerUpdate={this.update}
+            />
+          ))
+        }
         <div>{this.state.width}</div>
       </div>
     );
