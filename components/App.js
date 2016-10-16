@@ -12,30 +12,6 @@ class Widget extends Component {
     }
   }
 
-
-  componentWillMount() {
-    console.log('componentWillMount')
-  }
-
-  componentDidMount() {
-    console.log('componentDidMount')
-  }
-
-  componentDidUpdate() {
-    console.log('componentDidUpdate')
-  }
-
-  componentWillUnmount() {
-    console.log('componentDidUnmount')
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (+nextProps.message < +this.state.message) {
-      return;
-    }
-    this.setState({ message: nextProps.message });
-  }
-
   render() {
     return (
       <div>
@@ -57,6 +33,18 @@ Widget.defaultProps = {
   target: 'world'
 };
 
+
+function greenHOC(WrappedComponent) {
+  return (props) => (
+    <div style={{backgroundColor: 'green'}}>
+      <WrappedComponent {...props}/>
+    </div>
+  )
+}
+
+Widget = greenHOC(Widget);
+
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -65,10 +53,6 @@ class App extends Component {
       width: 0
     };
     this.update = this.update.bind(this);
-  }
-
-  shouldComponentUpdate(nextProps, nextState){
-    return nextState.text !== this.state.text;
   }
 
   update(e) {
