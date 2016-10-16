@@ -3,25 +3,14 @@
  */
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 
-class Widget extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      message: props.message
-    }
-  }
-
-  render() {
-    return (
-      <div>
-        <div>Hi {this.props.target} {this.state.message}</div>
-        <input onChange={this.props.handlerUpdate} />
-      </div>
-    );
-  }
-}
-
+let Widget = (props) => (
+  <div>
+    <div>Hi {props.target} {props.message}</div>
+    <input onChange={props.handlerUpdate} />
+  </div>
+);
 
 Widget.propTypes = {
   target: React.PropTypes.string.isRequired,
@@ -36,8 +25,8 @@ Widget.defaultProps = {
 
 function greenHOC(WrappedComponent) {
   return (props) => (
-    <div style={{backgroundColor: props.background}}>
-      <WrappedComponent {...props}/>
+    <div style={{ backgroundColor: props.background }}>
+      <WrappedComponent {...props} />
     </div>
   )
 }
@@ -54,6 +43,13 @@ class App extends Component {
     this.update = this.update.bind(this);
   }
 
+  componentWillMount() {
+    const root = 'https://jsonplaceholder.typicode.com';
+    axios.get(root + '/posts/1').then((response) => {
+      this.setState({ text: response.data.title });
+    });
+  }
+
   update(e) {
     console.log();
     this.setState({
@@ -66,7 +62,7 @@ class App extends Component {
     if (this.state.text === 'die') {
       return (<div ref="widget">whatever you wish</div>);
     }
-    const colors = ['tomato','lightgreen','deepskyblue'];
+    const colors = ['tomato', 'lightgreen', 'deepskyblue'];
     return (
       <div ref="widget">
         {
