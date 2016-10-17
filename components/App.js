@@ -5,8 +5,8 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 
-let Widget = (props) => (
-  <div>
+let Widget = (props, context) => (
+  <div style={{ color: context.color}} >
     <div>Hi {props.target} {props.message}</div>
     <input onChange={props.handlerUpdate} />
   </div>
@@ -20,6 +20,10 @@ Widget.propTypes = {
 
 Widget.defaultProps = {
   target: 'world'
+};
+
+Widget.contextTypes = {
+  color: React.PropTypes.string
 };
 
 
@@ -48,6 +52,10 @@ class App extends Component {
     axios.get(root + '/posts/1').then((response) => {
       this.setState({ text: response.data.title });
     });
+  }
+
+  getChildContext() {
+    return {color: "white"};
   }
 
   update(e) {
@@ -84,6 +92,10 @@ class App extends Component {
 
 App.propTypes = {
   target: React.PropTypes.string.isRequired
+};
+
+App.childContextTypes = {
+  color: React.PropTypes.string
 };
 
 export default App;
