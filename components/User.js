@@ -41,33 +41,36 @@ const style = {
   }
 };
 
-const UsersInfoRow = ({ description, value }) => (
+const UsersInfoRow = ({ description, value, changeInfo }) => (
   <div style={style.row}>
     <div style={style.description}>{description}:</div>
     <input
       value={value}
+      onChange={(e) => changeInfo(description, e.target.value)}
     />
   </div>
 );
 
-const User = ({ user, changeInfo}) => (
+const User = ({ user, changeInfo, selectUser }) => (
   <div style={style.card}>
     <div style={style.icon}>{user.name[0]}</div>
     <div style={style.column}>
       {
         Object.keys(user)
-          .filter(key => typeof user[key] === 'string')
+          .filter(key  => typeof user[key] === 'string')
           .map((key) => (
             <UsersInfoRow
               key={key}
               description={key}
               value={user[key]}
+              changeInfo={changeInfo}
+              selectUser={selectUser}
             />
           ))
       }
     </div>
     <div style={style.buttons}>
-      <button>Назад</button>
+      <button onClick={() => selectUser(0)}>Назад</button>
       <button>Отправить</button>
     </div>
   </div>

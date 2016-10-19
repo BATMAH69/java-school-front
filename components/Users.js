@@ -39,8 +39,8 @@ const UsersItemRow = ({ description, value }) => (
   </div>
 );
 
-const UsersItem = ({ name, website }) => (
-  <div style={style.card}>
+const UsersItem = ({ id, name, website, selectUser }) => (
+  <div style={style.card} onClick={() => selectUser(id)}>
     <div style={style.icon}>{name[0]}</div>
     <div style={style.column}>
       <UsersItemRow description="name" value={name} />
@@ -49,10 +49,10 @@ const UsersItem = ({ name, website }) => (
   </div>
 );
 
-const Users = ({ users }) => (
+const Users = ({ users, selectUser }) => (
   <div>
     {users.map(({ id, name, website }) => (
-      <UsersItem key={id} name={name} website={website} />
+      <UsersItem key={id} id={id} name={name} website={website} selectUser={selectUser}/>
     ))}
   </div>
 );

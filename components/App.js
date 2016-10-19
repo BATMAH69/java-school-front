@@ -47,14 +47,14 @@ class App extends Component {
 
     if (!this.state.userId) {
       return (
-        <Users users={this.state.users} />
+        <Users users={this.state.users} selectUser={this.selectUser}/>
       )
     }
 
     const user = this.state.users.find(user => user.id === this.state.userId);
 
     return (
-      <User user={user} />
+      <User user={user} selectUser={this.selectUser} changeInfo={this.changeInfo}/>
     )
 
   }
