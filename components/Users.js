@@ -32,7 +32,6 @@ const style = {
   }
 };
 
-
 const UsersItemRow = ({ description, value }) => (
   <div style={style.row}>
     <div style={style.description}>{description}:</div>

@@ -1,76 +1,11 @@
-/**
- * Created by batmah on 19.10.16.
- */
+/** Created by batmah on 19.10.16 */
 import React, { Component } from 'react';
 import axios from 'axios';
 
 import Users from './Users';
+import User from './User';
 
 // import './style.css'
-
-const style = {
-  card: {
-    display: 'flex',
-    alignItems: 'center',
-    flexDirection: 'column'
-  },
-  icon: {
-    margin: 5,
-    height: 100,
-    width: 100,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'gold',
-    borderRadius: '50%',
-    fontSize: 48
-  },
-  column: {
-    display: 'flex',
-    flexDirection: 'column'
-  },
-  row: {
-    margin: 5,
-    display: 'flex',
-    justifyContent: 'center',
-    flexDirection: 'row'
-  },
-  description: {
-    width: 70,
-    color: 'gray'
-  },
-  buttons:{
-    margin: 5,
-    display: 'flex',
-    justifyContent: 'center',
-  }
-};
-
-const UsersItemRow = ({ description, value }) => (
-  <div style={style.row}>
-    <div style={style.description}>{description}:</div>
-    <input value={value} />
-  </div>
-);
-
-const User = ({ user }) => (
-  <div style={style.card}>
-    <div style={style.icon}>{user.name[0]}</div>
-    <div style={style.column}>
-      {
-        Object.keys(user)
-          .filter(key => typeof user[key] === 'string')
-          .map((key) => (
-            <UsersItemRow key={key} description={key} value={user[key]} />
-          ))
-      }
-    </div>
-    <div style={style.buttons}>
-      <button>Назад</button>
-      <button>Отправить</button>
-    </div>
-  </div>
-);
 
 class App extends Component {
   constructor(props) {
@@ -80,6 +15,7 @@ class App extends Component {
       users: null
     };
     this.selectUser = this.selectUser.bind(this)
+    this.changeInfo = this.changeInfo.bind(this)
   }
 
   componentWillMount() {
@@ -92,6 +28,13 @@ class App extends Component {
     this.setState({userId});
   }
 
+  changeInfo(key, value) {
+    const index = this.state.users.findIndex(user => user.id === this.state.userId)
+    const users = this.state.users.slice();
+    users[index][key] = value;
+    this.setState({users});
+  }
+
   render() {
     console.log(this.state.users);
     if (!this.state.users) {
@@ -102,16 +45,16 @@ class App extends Component {
       )
     }
 
-    if (!this.state.users) {
+    if (!this.state.userId) {
       return (
-        <Users users={this.state.users}/>
+        <Users users={this.state.users} />
       )
     }
 
     const user = this.state.users.find(user => user.id === this.state.userId);
 
     return (
-      <User user={user}/>
+      <User user={user} />
     )
 
   }
