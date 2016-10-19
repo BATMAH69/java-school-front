@@ -30,7 +30,8 @@ const style = {
     flexDirection: 'row'
   },
   description: {
-    width: 50
+    width: 50,
+    color: 'gray'
   }
 };
 
@@ -49,6 +50,14 @@ const UsersItem = ({ name, website }) => (
       <UsersItemRow description="name" value={name} />
       <UsersItemRow description="www" value={website} />
     </div>
+  </div>
+);
+
+const Users = ({ users }) => (
+  <div>
+    {users.map(({ id, name, website }) => (
+      <UsersItem key={id} name={name} website={website} />
+    ))}
   </div>
 );
 
@@ -78,11 +87,7 @@ class App extends Component {
     }
 
     return (
-      <div>
-        {this.state.users.map(({ id, name, website }) => (
-          <UsersItem key={id} name={name} website={website} />
-        ))}
-      </div>
+      <Users users={this.state.users}/>
     )
   }
 }
