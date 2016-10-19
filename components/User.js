@@ -2,6 +2,7 @@
  * Created by batmah on 19.10.16.
  */
 import React from 'react';
+import axios from 'axios';
 
 const style = {
   card: {
@@ -51,6 +52,12 @@ const UsersInfoRow = ({ description, value, changeInfo }) => (
   </div>
 );
 
+const sendUser = (user) => {
+  axios.post('https://jsonplaceholder.typicode.com/posts')
+    .then((responce) => alert(JSON.stringify(responce.data)))
+    .catch((error) => console.error(error))
+};
+
 const User = ({ user, changeInfo, selectUser }) => (
   <div style={style.card}>
     <div style={style.icon}>{user.name[0]}</div>
@@ -71,7 +78,7 @@ const User = ({ user, changeInfo, selectUser }) => (
     </div>
     <div style={style.buttons}>
       <button onClick={() => selectUser(0)}>Назад</button>
-      <button>Отправить</button>
+      <button onClick={() => sendUser(user)}>Отправить</button>
     </div>
   </div>
 );
