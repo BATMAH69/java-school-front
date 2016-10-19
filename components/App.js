@@ -10,8 +10,11 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.state.users);
     return (
-      <div />
+      <div>
+        Loading...
+      </div>
     )
   }
 }
