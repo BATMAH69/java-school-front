@@ -53,7 +53,7 @@ const UsersInfoRow = ({ description, value, changeInfo }) => (
 );
 
 const sendUser = (user) => {
-  axios.post('https://jsonplaceholder.typicode.com/posts')
+  axios.post('https://jsonplaceholder.typicode.com/posts', {user})
     .then((responce) => alert(JSON.stringify(responce.data)))
     .catch((error) => console.error(error))
 };
