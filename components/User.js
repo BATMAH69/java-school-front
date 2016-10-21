@@ -36,11 +36,19 @@ const style = {
     color: 'gray'
   },
   buttons:{
-    margin: 5,
     display: 'flex',
     justifyContent: 'center',
+  },
+  button:{
+    margin: 5
   }
 };
+
+const Button = ({onClick, children}) => (
+  <button style={style.button} onClick={onClick}>
+    {children}
+  </button>
+);
 
 const UsersInfoRow = ({ description, value, changeInfo }) => (
   <div style={style.row}>
@@ -77,10 +85,10 @@ const User = ({ user, changeInfo, selectUser }) => (
       }
     </div>
     <div style={style.buttons}>
-      <button onClick={() => selectUser(user.id-1)}>Предыдущий</button>
-      <button onClick={() => selectUser(0)}>Список</button>
-      <button onClick={() => sendUser(user)}>Отправить</button>
-      <button onClick={() => selectUser(user.id+1)}>Следующий</button>
+      <Button onClick={() => selectUser(user.id - 1)}>{'<-'}</Button>
+      <Button onClick={() => selectUser(0)}>Список</Button>
+      <Button onClick={() => sendUser(user)}>Отправить</Button>
+      <Button onClick={() => selectUser(user.id + 1)}>{'->'}</Button>
     </div>
   </div>
 );
