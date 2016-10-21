@@ -24,7 +24,11 @@ class App extends Component {
       .catch((errror) => console.error(errror))
   }
 
-  selectUser(userId){
+  selectUser(id){
+    let userId = id;
+    if (userId > this.state.users.length){
+      userId = 0;
+    }
     this.setState({userId});
   }
 
