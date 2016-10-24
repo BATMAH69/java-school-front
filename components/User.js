@@ -61,8 +61,11 @@ const UsersInfoRow = ({ description, value, changeInfo }) => (
 );
 
 const sendUser = (user) => {
+  // отсылаем изменения на сервер
   axios.post('https://jsonplaceholder.typicode.com/posts', {user})
+    // при успехе показать всплывающее окно
     .then((responce) => alert(JSON.stringify(responce.data)))
+    // при неудаче ошибку в консоль
     .catch((error) => console.error(error))
 };
 
@@ -71,6 +74,7 @@ const User = ({ user, changeInfo, selectUser }) => (
     <div style={style.icon}>{user.name[0]}</div>
     <div style={style.column}>
       {
+        // Выбирает все текстовые поля первого уровня вложености и делает из них редактируемые
         Object.keys(user)
           .filter(key  => typeof user[key] === 'string')
           .map((key) => (
