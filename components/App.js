@@ -44,7 +44,7 @@ class App extends Component {
     // клонируем массив
     const users = this.state.users.slice();
     // меняем параметры в новой копии в стиле ES6
-    users[index] = {...users[index], [key]: value };
+    users[index] = Object.assign({},users[index],{[key]: value});
     // присваеваем новый массив с измененными данными
     this.setState({users});
   }
