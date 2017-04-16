@@ -2,6 +2,7 @@
  * Created by batmah on 16.10.16.
  */
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 
 class App extends Component {
   constructor(props) {
@@ -19,7 +20,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <div>Hi {this.props.target} {this.state.count}</div>
+        <div>Hi {this.props.test} {this.props.target} {this.props.count}</div>
         <input onChange={this.update} />
       </div>
     )
@@ -27,7 +28,10 @@ class App extends Component {
 }
 
 App.propTypes = {
-  target: React.PropTypes.string.isRequired
+  target: React.PropTypes.string.isRequired,
+  count: React.PropTypes.number.isRequired
 };
 
-export default App;
+export default connect(
+  ({count}) => ({count})
+)(App);

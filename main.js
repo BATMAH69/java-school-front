@@ -3,5 +3,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
 
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 
-ReactDOM.render(<App target="react" />, document.getElementById('app'));
+const store = createStore(state => state, {count: 25});
+
+
+ReactDOM.render(<Provider store={store}><App target="react" /></Provider>, document.getElementById('app'));
