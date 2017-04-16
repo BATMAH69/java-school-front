@@ -6,7 +6,7 @@ import App from './components/App';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
-const store = createStore(state => state, {count: 25});
+const store = createStore((state,action) => Object.assign({}, state, {count: action.count}), {count: 25});
 
 
 ReactDOM.render(<Provider store={store}><App target="react" /></Provider>, document.getElementById('app'));

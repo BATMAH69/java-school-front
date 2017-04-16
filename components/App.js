@@ -14,7 +14,7 @@ class App extends Component {
   }
 
   update(e) {
-    this.setState({ count: e.target.value })
+    this.props.setCount(e.target.value);
   }
 
   render() {
@@ -29,9 +29,11 @@ class App extends Component {
 
 App.propTypes = {
   target: React.PropTypes.string.isRequired,
-  count: React.PropTypes.number.isRequired
+  count: React.PropTypes.number.isRequired,
+  setCount: React.PropTypes.func.isRequired
 };
 
 export default connect(
-  ({count}) => ({count})
+  store => ({count: store.count}),
+  dispatch => ({ setCount: (count) => dispatch({type:'INC', count})})
 )(App);
