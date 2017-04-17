@@ -1,9 +1,10 @@
-import {SET_COUNT} from './actions';
+import {SET_COUNT, RENEW_COUNT} from './actions';
 
 const initialState = { count: '26' };
 
 const reducer = {
   [SET_COUNT]: (state, action) => Object.assign({}, state, { count: action.payload }),
+  [RENEW_COUNT]: () => initialState
 };
 
 export default (state = initialState, action) => {

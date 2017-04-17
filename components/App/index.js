@@ -4,11 +4,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { setCount } from './actions'
+import { setCount, renewCount } from './actions'
 
 const App = (props) => (
   <div>
-    <div>Hi {props.target} {props.count}</div>
+    <div onClick={props.renewCount}>Hi {props.target} {props.count}</div>
     <input value={props.count} onChange={props.setCount} />
   </div>
 );
@@ -21,5 +21,9 @@ App.propTypes = {
 
 export default connect(
   store => ({count: store.app.count}),
-  dispatch => ({ setCount: (event) => dispatch(setCount(event.target.value))})
+  dispatch => ({
+    setCount: event => dispatch(setCount(event.target.value)),
+    renewCount: () => dispatch(renewCount),
+
+  })
 )(App);
