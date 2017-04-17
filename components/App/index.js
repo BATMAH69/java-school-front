@@ -2,7 +2,9 @@
  * Created by batmah on 16.10.16.
  */
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+
+import { setCount } from './actions'
 
 const App = (props) => (
   <div>
@@ -18,6 +20,6 @@ App.propTypes = {
 };
 
 export default connect(
-  store => ({count: store.count}),
-  dispatch => ({ setCount: (event) => dispatch({type:'INC', count:event.target.value})})
+  store => ({count: store.app.count}),
+  dispatch => ({ setCount: (event) => dispatch(setCount(event.target.value))})
 )(App);

@@ -3,17 +3,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
 
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 
-const reducer = (state, action) => {
-  if (action.type !== 'INC'){
-    return state;
-  }
-  return Object.assign({}, state, {count: action.count});
-};
+import app from './components/App/reducer';
 
-const store = createStore(reducer, {count: 25});
+const reducer = combineReducers({ app });
+
+const store = createStore(reducer);
 
 
 ReactDOM.render(<Provider store={store}><App target="react" /></Provider>, document.getElementById('app'));
