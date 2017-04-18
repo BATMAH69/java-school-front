@@ -5,7 +5,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import InputTextRedux from '../InputTextRedux';
-import { renewCount } from './actions'
+import { renewCounts } from './actions'
 
 
 //Для отображения обновлений
@@ -37,7 +37,7 @@ const Inputs = connect()((props)=>(
 
 const App = (props) => (
   <Div>
-    <Div onClick={props.renewCount}>
+    <Div onClick={props.renewCounts}>
       <Div>Hi {props.target} VERY BIG ELEMENT</Div>
       <Counts />
     </Div>
@@ -52,6 +52,6 @@ App.propTypes = {
 export default connect(
   store => ({date:Date.now()}),
   dispatch => ({
-    renewCount: () => dispatch(renewCount),
+    renewCounts: () => dispatch(renewCounts()),
   })
 )(App);
