@@ -6,11 +6,18 @@ import { connect } from 'react-redux';
 
 import { setCount, renewCount } from './actions'
 
+//Для отображения обновлений
+const Input = (props) => <input {...props} />;
+const Div = (props) => <div {...props} />;
+
 const App = (props) => (
-  <div>
-    <div onClick={props.renewCount}>Hi {props.target} {props.count}</div>
-    <input value={props.count} onChange={props.setCount} />
-  </div>
+  <Div>
+    <Div onClick={props.renewCount}>
+      <Div>Hi {props.target} VERY BIG ELEMENT</Div>
+      <Div>{props.count}</Div>
+    </Div>
+    <Input value={props.count} onChange={props.setCount} />
+  </Div>
 );
 
 App.propTypes = {
