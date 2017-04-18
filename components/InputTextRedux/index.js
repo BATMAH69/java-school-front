@@ -10,9 +10,12 @@ import {
 
 //Для отображения обновлений
 const Input = (props) => <input {...props} />;
+const Span = (props) => <span {...props} />;
+
+const style = {margin: 10};
 
 const InputText = (props) => (
-  <Input value={props.count} onChange={props.setCount} />
+  <Span><Input style={style} value={props.count} onChange={props.setCount} /></Span>
 );
 
 InputText.propTypes = {
@@ -20,16 +23,25 @@ InputText.propTypes = {
   count: React.PropTypes.string.isRequired,
   setCount: React.PropTypes.func.isRequired,
 };
-
 InputText.defaultProps = {
   count: '',
 };
 
-export default connect(
-  (store, props) => ({
-    count: store.app[props.name],
+const InputTextReduxFactory = (name) => connect(
+  store => ({
+    count: store.app[name],
   }),
-  (dispatch, props) => ({
-    setCount: event => dispatch(setCount(event.target.value, props.name)),
+  dispatch => ({
+    setCount: event => dispatch(setCount(event.target.value, name)),
   })
 )(InputText);
+
+export default class InputTextRedux extends React.Component{
+  shouldComponentUpdate(){
+    return false;
+  }
+  render(){
+    const Component = InputTextReduxFactory(this.props.name);
+    return <Component />
+  }
+}
