@@ -20,12 +20,8 @@ const Counts = connect(
 )((props) => <Div>{props.count0+' '+props.count1}</Div>);
 
 
-const App = (props) => (
+const Inputs = connect()((props)=>(
   <Div>
-    <Div onClick={props.renewCount}>
-      <Div>Hi {props.target} VERY BIG ELEMENT</Div>
-      <Counts />
-    </Div>
     <InputTextRedux name={'count0'} />
     <InputTextRedux name={'count1'} />
     <InputTextRedux name={'count2'} />
@@ -36,6 +32,16 @@ const App = (props) => (
     <InputTextRedux name={'count7'} />
     <InputTextRedux name={'count8'} />
     <InputTextRedux name={'count9'} />
+  </Div>
+));
+
+const App = (props) => (
+  <Div>
+    <Div onClick={props.renewCount}>
+      <Div>Hi {props.target} VERY BIG ELEMENT</Div>
+      <Counts />
+    </Div>
+    <Inputs />
   </Div>
 );
 
