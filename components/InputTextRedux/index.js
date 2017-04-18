@@ -17,8 +17,12 @@ const InputText = (props) => (
 
 InputText.propTypes = {
   name: React.PropTypes.string.isRequired,
-  count: React.PropTypes.string,
+  count: React.PropTypes.string.isRequired,
   setCount: React.PropTypes.func.isRequired,
+};
+
+InputText.defaultProps = {
+  count: '',
 };
 
 export default connect(
