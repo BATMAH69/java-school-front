@@ -1,5 +1,23 @@
-export const SET_COUNT = 'SET_COUNT';
+export const SET_COUNT0 = 'SET_COUNT0';
+export const SET_COUNT1 = 'SET_COUNT1';
+export const SET_COUNT2 = 'SET_COUNT2';
+export const SET_COUNT3 = 'SET_COUNT3';
+export const SET_COUNT4 = 'SET_COUNT4';
+export const SET_COUNT5 = 'SET_COUNT5';
+export const SET_COUNT6 = 'SET_COUNT6';
+export const SET_COUNT7 = 'SET_COUNT7';
+export const SET_COUNT8 = 'SET_COUNT8';
+export const SET_COUNT9 = 'SET_COUNT9';
 export const RENEW_COUNT = 'RENEW_COUNT';
 
-export const setCount = data => ({ type: SET_COUNT, payload: data });
+export const setCount0 = data => ({ type: SET_COUNT0, payload: data });
+export const setCount1 = data => ({ type: SET_COUNT1, payload: data });
+export const setCount2 = data => ({ type: SET_COUNT2, payload: data });
+export const setCount3 = data => ({ type: SET_COUNT3, payload: data });
+export const setCount4 = data => ({ type: SET_COUNT4, payload: data });
+export const setCount5 = data => ({ type: SET_COUNT5, payload: data });
+export const setCount6 = data => ({ type: SET_COUNT6, payload: data });
+export const setCount7 = data => ({ type: SET_COUNT7, payload: data });
+export const setCount8 = data => ({ type: SET_COUNT8, payload: data });
+export const setCount9 = data => ({ type: SET_COUNT9, payload: data });
 export const renewCount = ({ type: RENEW_COUNT });
