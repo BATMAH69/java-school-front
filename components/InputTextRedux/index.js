@@ -38,7 +38,7 @@ const InputTextReduxFactory = (name) => connect(
 
 export default class InputTextRedux extends React.Component{
   shouldComponentUpdate(){
-    return false;
+    return false; // Почему тут false??????
   }
   render(){
     const Component = InputTextReduxFactory(this.props.name);
