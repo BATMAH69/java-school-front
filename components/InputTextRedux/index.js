@@ -10,9 +10,12 @@ import {
 
 //Для отображения обновлений
 const Input = (props) => <input {...props} />;
+const Span = (props) => <span {...props} />;
+
+const style = {margin: 10};
 
 const InputText = (props) => (
-  <Input value={props.count} onChange={props.setCount} />
+  <Span><Input style={style} value={props.count} onChange={props.setCount} /></Span>
 );
 
 InputText.propTypes = {
