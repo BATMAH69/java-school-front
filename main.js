@@ -3,14 +3,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
 
-import { createStore, compose, combineReducers } from 'redux';
+import { createStore, compose, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 
 import app from './components/App/reducer';
 
 const reducer = combineReducers({ app });
 
 const createStoreWithDevTools = compose(
+  applyMiddleware(thunk),
   global.devToolsExtension ? global.devToolsExtension() : f => f,
 )(createStore);
 
