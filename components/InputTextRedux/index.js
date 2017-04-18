@@ -24,6 +24,10 @@ InputText.propTypes = {
   setCount: React.PropTypes.func.isRequired,
 };
 
+InputText.defaultProps = {
+  count: '',
+};
+
 export default connect(
   (store, props) => ({
     count: store.app[props.name],
