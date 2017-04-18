@@ -13,7 +13,18 @@ import {
 } from './actions';
 import {reducerObjective} from '../../helper/redux';
 
-const initialState = {};
+const initialState = {
+  count0: '',
+  count1: '',
+  count2: '',
+  count3: '',
+  count4: '',
+  count5: '',
+  count6: '',
+  count7: '',
+  count8: '',
+  count9: '',
+};
 
 const reducers = {
   [SET_COUNT0]: (state, action) => Object.assign({}, state, { count0: action.payload }),
