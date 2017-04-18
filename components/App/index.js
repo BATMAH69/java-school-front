@@ -4,22 +4,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import {
-  setCount0,
-  setCount1,
-  setCount2,
-  setCount3,
-  setCount4,
-  setCount5,
-  setCount6,
-  setCount7,
-  setCount8,
-  setCount9,
-  renewCount
-} from './actions'
+import InputTextRedux from '../InputTextRedux';
+import { renewCount } from './actions'
+
 
 //Для отображения обновлений
-const Input = (props) => <input {...props} />;
+
 const Div = (props) => <div {...props} />;
 
 const App = (props) => (
@@ -28,16 +18,16 @@ const App = (props) => (
       <Div>Hi {props.target} VERY BIG ELEMENT</Div>
       <Div>{props.count0+' '+props.count1}</Div>
     </Div>
-    <Input value={props.count0} onChange={props.setCount0} />
-    <Input value={props.count1} onChange={props.setCount1} />
-    <Input value={props.count2} onChange={props.setCount2} />
-    <Input value={props.count3} onChange={props.setCount3} />
-    <Input value={props.count4} onChange={props.setCount4} />
-    <Input value={props.count5} onChange={props.setCount5} />
-    <Input value={props.count6} onChange={props.setCount6} />
-    <Input value={props.count7} onChange={props.setCount7} />
-    <Input value={props.count8} onChange={props.setCount8} />
-    <Input value={props.count9} onChange={props.setCount9} />
+    <InputTextRedux name={'count0'} />
+    <InputTextRedux name={'count1'} />
+    <InputTextRedux name={'count2'} />
+    <InputTextRedux name={'count3'} />
+    <InputTextRedux name={'count4'} />
+    <InputTextRedux name={'count5'} />
+    <InputTextRedux name={'count6'} />
+    <InputTextRedux name={'count7'} />
+    <InputTextRedux name={'count8'} />
+    <InputTextRedux name={'count9'} />
   </Div>
 );
 
