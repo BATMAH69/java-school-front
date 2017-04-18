@@ -12,11 +12,19 @@ import { renewCount } from './actions'
 
 const Div = (props) => <div {...props} />;
 
+const Counts = connect(
+  store => ({
+    count0: store.app.count0,
+    count1: store.app.count1,
+  })
+)((props) => <Div>{props.count0+' '+props.count1}</Div>);
+
+
 const App = (props) => (
   <Div>
     <Div onClick={props.renewCount}>
       <Div>Hi {props.target} VERY BIG ELEMENT</Div>
-      <Div>{props.count0+' '+props.count1}</Div>
+      <Counts />
     </Div>
     <InputTextRedux name={'count0'} />
     <InputTextRedux name={'count1'} />
@@ -36,10 +44,7 @@ App.propTypes = {
 };
 
 export default connect(
-  store => ({
-    count0: store.app.count0,
-    count1: store.app.count1,
-  }),
+  store => ({}),
   dispatch => ({
     renewCount: () => dispatch(renewCount),
   })
