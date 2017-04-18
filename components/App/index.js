@@ -44,7 +44,7 @@ App.propTypes = {
 };
 
 export default connect(
-  store => ({}),
+  store => ({date:Date.now()}),
   dispatch => ({
     renewCount: () => dispatch(renewCount),
   })
