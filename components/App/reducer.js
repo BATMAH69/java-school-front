@@ -11,4 +11,6 @@ const reducers = {
   [RENEW_COUNT1]: (state) => Object.assign({}, state, { count1: '' }),
 };
 
-export default reducerObjective(reducers, initialState);
+const replacer = (type) => `${type}`.replace(new RegExp(`^((${SET_COUNT})_.*)`),'$2');
+
+export default reducerObjective(reducers, initialState, replacer);
