@@ -6,7 +6,7 @@ import { fromJS } from 'immutable';
 
 const a = {b:[1,{c:25},3,4,5], d:6};
 
-const c = 25;
+const c = 24;
 
 // const e = a;
 //
