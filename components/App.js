@@ -2,24 +2,22 @@
  * Created by batmah on 16.10.16.
  */
 import React from 'react';
-import { fromJS } from 'immutable';
+import { fromJS, Record } from 'immutable';
 
-const a = fromJS({b:[1,{c:25},3,4,5], d:6});
 
-const c = 25;
+const ARecord = Record({b:[1,{c:25},3,4,5], d:6});
+const a = new ARecord();
 
-const e = a.setIn(['b',1,'c'], c);
+const c = 5;
+
+const e = a.setIn(['d'], c);
 
 // arrow
 const App = () => {
   console.log(a);
   console.log(e);
   console.log('e === a', e === a);
-  console.log('e.d === a.d',e.get('d') === a.get('d'));
-  console.log('e.d === a.d',e.get('b') === a.get('b'));
-  console.log('e.b[0] === a.b[0]',e.getIn(['b',0]) === a.getIn(['b',0]));
-  console.log('e.b[0] === a.b[0]',e.getIn(['b',1]) === a.getIn(['b',1]));
-  console.log('e.b[0] === a.b[0]',e.getIn(['b',1,'c']) === a.getIn(['b',1,'c']));
+  console.log('e.d === a.d',e.d === a.d);
 
   return <div>ALL IN CONSOLE</div>
 };
