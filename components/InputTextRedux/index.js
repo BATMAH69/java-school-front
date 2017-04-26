@@ -30,7 +30,7 @@ InputText.defaultProps = {
 
 export default connect(
   (store, props) => ({
-    count: store.app.get(props.name),
+    count: store.getIn(['app',props.name]),
   }),
   (dispatch, props) => ({
     setCount: event => dispatch(setCount(event.target.value, props.name)),

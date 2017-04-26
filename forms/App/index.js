@@ -14,8 +14,8 @@ const Div = (props) => <div {...props} />;
 
 const Counts = connect(
   store => ({
-    count0: store.app.get('count0'),
-    count1: store.app.get('count1'),
+    count0: store.getIn(['app','count0']),
+    count1: store.getIn(['app','count1']),
   })
 )((props) => <Div>{props.count0+' '+props.count1}</Div>);
 
