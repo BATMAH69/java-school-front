@@ -1,15 +1,13 @@
 /** Created by batmah on 16.10.16. */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
+import App from './forms/App';
 
-import { createStore, compose, combineReducers, applyMiddleware } from 'redux';
+import { createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
-import app from './components/App/reducer';
-
-const reducer = combineReducers({ app });
+import reducer from './reducers';
 
 const createStoreWithDevTools = compose(
   applyMiddleware(thunk),

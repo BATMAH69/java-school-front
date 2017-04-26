@@ -1,8 +1,8 @@
 import { RENEW_COUNT0, RENEW_COUNT1 } from './actions';
 import {reducerObjective} from '../../helper/redux';
 
-import InputTextReduxReducer from '../InputTextRedux/reducer';
-import {SET_COUNT} from '../InputTextRedux/actions'
+import InputTextReduxReducer from '../../components/InputTextRedux/reducer';
+import { SET_COUNT } from '../../components/InputTextRedux/actions'
 const initialState = {};
 
 const reducers = {

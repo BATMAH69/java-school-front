@@ -4,7 +4,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import InputTextRedux from '../InputTextRedux';
+import { InputTextRedux } from '../../components';
 import { renewCounts } from './actions'
 
 
