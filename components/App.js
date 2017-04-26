@@ -4,11 +4,14 @@
 import React from 'react';
 import { fromJS } from 'immutable';
 
-const a = fromJS({b:[1,{c:25},3,4,5], d:6});
+const a1 = fromJS({b:[1,{c:25},3,4,5], d:6});
 
 const c = 25;
 
-const e = a.setIn(['b',1,'c'], c);
+const e1 = a1.setIn(['b',1,'c'], c);
+
+const a = a1.toJS();
+const e = e1.toJS();
 
 // arrow
 const App = () => {
