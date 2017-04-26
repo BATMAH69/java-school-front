@@ -8,7 +8,7 @@ const a = fromJS({b:[1,{c:25},3,4,5], d:6});
 
 const c = 24;
 
-const e = a.mergeDeepIn(['b'], [1,{c}]);
+const e = a.setIn(['b'], fromJS([1,{c}]));
 
 // arrow
 const App = () => {
