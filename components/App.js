@@ -2,28 +2,22 @@
  * Created by batmah on 16.10.16.
  */
 import React from 'react';
+import { fromJS } from 'immutable';
 
-// //origin js
-// const App = function App() {
-//   return React.createElement(
-//     'div',
-//     null,
-//     'Hi World1'
-//   );
-// };
+const a = {b:[1,{c:25},3,4,5], d:6};
 
-// // class
-// class App extends React {
-//   render() {
-//     return (
-//       <div>Hi World</div>
-//     )
-//   }
-// }
+const c = 24;
+
+const e = a;
+
+e.b[1].c = c;
 
 // arrow
-const App = () => (
-  <div>Hi World</div>
-);
+const App = () => {
+  console.log(a);
+  console.log(e);
+  console.log(e === a);
+  return <div>ALL IN CONSOLE</div>
+};
 
 export default App;
