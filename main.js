@@ -6,7 +6,8 @@ import App from './components/App';
 import {
   BrowserRouter as Router,
   Route,
-  Link
+  Link,
+  Switch
 } from 'react-router-dom';
 
 const style = {
@@ -27,7 +28,10 @@ ReactDOM.render(
       <Link style={style.link} to="/users">/users</Link>
       <Link style={style.link} to="/userswqewqe">/userswqewqe</Link>
       <Link style={style.link} to="/">/</Link>
-      <Route exact path="/user/:id" component={App} />
-      <Route exact path="/" component={App} />
+      <Switch>
+        <Route exact path="/user/:id" component={App} />
+        <Route exact path="/" component={App} />
+        <Route component={()=><div>404</div>}/>
+      </Switch>
     </div>
   </Router>, document.getElementById('app'));
