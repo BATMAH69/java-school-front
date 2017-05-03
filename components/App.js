@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import Users from './Users';
 import User from './User';
+import * as style from './style.css';
 
 // import './style.css'
 
@@ -38,6 +39,9 @@ class App extends Component {
   }
 
   render() {
+
+    console.log(style);
+
     const id = Number(this.props.match.params.id) || 0;
 
     if (!this.state.users) {
@@ -51,8 +55,9 @@ class App extends Component {
 
     if (!id || id > this.state.users.length) {
       // если есть данные, но пользователь не выбран
-      return (
-        <Users users={this.state.users} selectUser={this.selectUser}/>
+      return (<div className={style.red}>
+          <Users users={this.state.users} selectUser={this.selectUser}/>
+        </div>
       )
     }
 

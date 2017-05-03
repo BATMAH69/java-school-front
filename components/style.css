@@ -1,0 +1,11 @@
+.red :global(.row) {
+    color:green;
+}
+
+.red1 {
+    color:green;
+}
+
+.red div{
+    background: red !important;
+}
