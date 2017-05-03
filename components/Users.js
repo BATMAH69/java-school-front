@@ -3,6 +3,10 @@
  */
 import React from 'react';
 
+import {
+  Link
+} from 'react-router-dom';
+
 const style = {
   users:{
     display: 'flex',
@@ -10,7 +14,9 @@ const style = {
   },
   card: {
     margin:10,
-    display: 'flex'
+    display: 'flex',
+    textDecoration: 'inherit',
+    color:  'black',
   },
   icon: {
     marginRight: 10,
@@ -43,14 +49,14 @@ const UsersItemRow = ({ description, value }) => (
   </div>
 );
 
-const UsersItem = ({ id, name, website, selectUser }) => (
-  <div style={style.card} onClick={() => selectUser(id)}>
-    <div style={style.icon}>{name[0]}</div>
-    <div style={style.column}>
-      <UsersItemRow description="name" value={name} />
-      <UsersItemRow description="www" value={website} />
-    </div>
-  </div>
+const UsersItem = ({ id, name, website }) => (
+  <Link style={style.card} to={`/user/${id}`}>
+      <div style={style.icon}>{name[0]}</div>
+      <div style={style.column}>
+        <UsersItemRow description="name" value={name} />
+        <UsersItemRow description="www" value={website} />
+      </div>
+  </Link>
 );
 
 const Users = ({ users, selectUser }) => (

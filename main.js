@@ -9,14 +9,24 @@ import {
   Link
 } from 'react-router-dom';
 
+const style = {
+  link: {
+    padding: 5
+  },
+  container:{
+    textAlign: 'center'
+  }
+};
 
 ReactDOM.render(
   <Router>
-    <div>
-      <Link to="/user/1" >user1</Link>
-      <Link to="/users" >users</Link>
-      <Link to="/userswqewqe" >usersadas</Link>
-      <Link to="/" >usersadas</Link>
+    <div style={style.container}>
+      <Link style={style.link} to="/user/1">/user/1</Link>
+      <Link style={style.link} to="/user/asdasda">/user/asdasda</Link>
+      <Link style={style.link} to="/user/342342">/user/342342</Link>
+      <Link style={style.link} to="/users">/users</Link>
+      <Link style={style.link} to="/userswqewqe">/userswqewqe</Link>
+      <Link style={style.link} to="/">/</Link>
       <Route exact path="/user/:id" component={App} />
       <Route exact path="/" component={App} />
     </div>

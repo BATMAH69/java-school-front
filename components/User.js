@@ -4,6 +4,11 @@
 import React from 'react';
 import axios from 'axios';
 
+import {
+  Link
+} from 'react-router-dom';
+
+
 const style = {
   card: {
     display: 'flex',
@@ -35,16 +40,21 @@ const style = {
     width: 70,
     color: 'gray'
   },
-  buttons:{
+  link: {
+    textDecoration: 'inherit',
+    color: 'black',
+    padding: 5,
+  },
+  buttons: {
     display: 'flex',
     justifyContent: 'center',
   },
-  button:{
+  button: {
     margin: 5
   }
 };
 
-const Button = ({onClick, children}) => (
+const Button = ({ onClick, children }) => (
   <button style={style.button} onClick={onClick}>
     {children}
   </button>
@@ -62,8 +72,8 @@ const UsersInfoRow = ({ description, value, changeInfo }) => (
 
 const sendUser = (user) => {
   // отсылаем изменения на сервер
-  axios.post('https://jsonplaceholder.typicode.com/posts', {user})
-    // при успехе показать всплывающее окно
+  axios.post('https://jsonplaceholder.typicode.com/posts', { user })
+  // при успехе показать всплывающее окно
     .then((responce) => alert(JSON.stringify(responce.data)))
     // при неудаче ошибку в консоль
     .catch((error) => console.error(error))
@@ -76,7 +86,7 @@ const User = ({ user, changeInfo, selectUser }) => (
       {
         // Выбирает все текстовые поля первого уровня вложености и делает из них редактируемые
         Object.keys(user)
-          .filter(key  => typeof user[key] === 'string')
+          .filter(key => typeof user[key] === 'string')
           .map((key) => (
             <UsersInfoRow
               key={key}
@@ -89,10 +99,10 @@ const User = ({ user, changeInfo, selectUser }) => (
       }
     </div>
     <div style={style.buttons}>
-      <Button onClick={() => selectUser(user.id - 1)}>{'<-'}</Button>
-      <Button onClick={() => selectUser(0)}>Список</Button>
+      <Link style={style.link} to={`/user/${user.id - 1}`}>{'<-'}</Link>
+      <Link style={style.link} to="/">Список</Link>
       <Button onClick={() => sendUser(user)}>Отправить</Button>
-      <Button onClick={() => selectUser(user.id + 1)}>{'->'}</Button>
+      <Link style={style.link} to={`/user/${user.id + 1}`}>{'->'}</Link>
     </div>
   </div>
 );
