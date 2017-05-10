@@ -1,0 +1,14 @@
+{
+  "extends": "airbnb",
+
+  "env": {
+    "browser": true,
+    "node": true
+  },
+
+  "rules": {
+    "no-mixed-operators": ["error", { "allowSamePrecedence": true }],
+    "quote-props": ["error", "as-needed", { "unnecessary": false }],
+    "max-len": ["warn", 120, 2]
+  }
+}
