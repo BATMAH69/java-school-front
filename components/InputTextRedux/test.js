@@ -9,6 +9,11 @@ import TestUtils from  'react-addons-test-utils';
 import InputTextRedux from './index';
 import reducers from './reducer';
 
+/* eslint no-undef: 0 */
+/* eslint object-curly-spacing: 0 */
+/* eslint key-spacing: 0 */
+/* eslint comma-spacing: 0 */
+/* eslint max-len: 0 */
 
 const filterNode = (state) => fromJS(state.app);
 
