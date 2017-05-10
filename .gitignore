@@ -4,3 +4,4 @@ build/
 coverage/
 .idea
 *.log*
+style.css.d.ts
