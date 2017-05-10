@@ -45,5 +45,21 @@ describe('InputTextRedux', () => {
 
   });
 
+  it('render', () => {
+
+    const storeNext = createStore(state => state, fromJS({app:nextState}));
+
+    const node = TestUtils.renderIntoDocument(
+      <Provider store={storeNext}>
+        <InputTextRedux name={'count0'} />
+      </Provider>
+    );
+
+    const elem = ReactDOM.findDOMNode(node).querySelector('input');
+
+    expect(elem.value).toBe('1');
+
+  });
+
 });
 
