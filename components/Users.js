@@ -13,10 +13,11 @@ import {
 const style = StyleSheet.create({
   users:{
     justifyContent: 'center',
+    alignItems:'center',
   },
   card: {
     margin:10,
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   icon: {
     marginRight: 10,
