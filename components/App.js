@@ -30,8 +30,8 @@ class App extends Component {
   componentWillMount() {
     //e178d1d9.ngrok.io
     fetch('https://jsonplaceholder.typicode.com/users')
-      .then(response => {alert(response.json);return response.json()})
-      .then(json => {alert(JSON.stringify(json));this.setState({ users: json })})
+      .then(response => response.json())
+      .then(json => this.setState({ users: json }))
       .catch((err) => alert('service jsonplaceholder.typicode.com not work'))
   }
 
@@ -83,9 +83,9 @@ class App extends Component {
     const user = this.state.users.find(user => user.id === this.state.userId);
 
     return (
-      <ScrollView>
+      <View style={{flex:1}}>
         <User user={user} selectUser={this.selectUser} changeInfo={this.changeInfo} />
-      </ScrollView>
+      </View>
     )
 
   }

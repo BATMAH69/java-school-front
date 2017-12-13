@@ -12,8 +12,10 @@ import {
 
 const style = StyleSheet.create({
   card: {
+    flex:1,
     alignItems: 'center',
-    flexDirection: 'column'
+    justifyContent: 'center',
+    flexDirection: 'column',
   },
   icon: {
     margin: 5,
@@ -37,7 +39,8 @@ const style = StyleSheet.create({
     width: 70
   },
   input: {
-    width: 150
+    width: 150,
+    padding: 5
   },
   buttons: {
     flexDirection: 'row',
@@ -68,15 +71,16 @@ const UsersInfoRow = ({ description, value, changeInfo }) => (
 );
 
 const sendUser = (user) => {
+  //e178d1d9.ngrok.io
   fetch('https://jsonplaceholder.typicode.com/posts',{ method: "POST",})
     .then(responce => responce.json())
-    .then(json => alert(JSON.stringify(json.data)))
+    .then(json => alert(JSON.stringify(json)))
     .catch((err) => alert('service jsonplaceholder.typicode.com not work'))
 };
 
 const User = ({ user, changeInfo, selectUser }) => (
   <View style={style.card}>
-    <View style={style.icon}><Text>{user.name[0]}</Text></View>
+    <View style={style.icon}><Text style={{fontSize:48}}>{user.name[0]}</Text></View>
     <View style={style.column}>
       {
         Object.keys(user)
