@@ -2,65 +2,69 @@
  * Created by batmah on 19.10.16.
  */
 import React from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  TextInput
+} from 'react-native';
 
-const style = {
+const style = StyleSheet.create({
   users:{
-    display: 'flex',
     justifyContent: 'center',
   },
   card: {
     margin:10,
-    display: 'flex'
+    flexDirection: 'row'
   },
   icon: {
     marginRight: 10,
     height: 40,
     width: 40,
-    display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'gold',
     borderRadius: 20
   },
   column: {
-    display: 'flex',
     flexDirection: 'column'
   },
   row: {
-    display: 'flex',
     flexDirection: 'row'
   },
   description: {
-    width: 50,
-    color: 'gray'
+    width: 50
   }
-};
+});
 
 const UsersItemRow = ({ description, value }) => (
-  <div style={style.row}>
-    <div style={style.description}>{description}:</div>
-    <div>{value}</div>
-  </div>
+  <View style={style.row}>
+    <View style={style.description}><Text>{description}:</Text></View>
+    <View><Text>{value}</Text></View>
+  </View>
 );
 
 const UsersItem = ({ id, name, website, selectUser }) => (
-  <div style={style.card} onClick={() => selectUser(id)}>
-    <div style={style.icon}>{name[0]}</div>
-    <div style={style.column}>
-      <UsersItemRow description="name" value={name} />
-      <UsersItemRow description="www" value={website} />
-    </div>
-  </div>
+  <TouchableOpacity onPress={() => selectUser(id)}>
+    <View style={style.card}>
+      <View style={style.icon}><Text>{name[0]}</Text></View>
+      <View style={style.column}>
+        <UsersItemRow description="name" value={name} />
+        <UsersItemRow description="www" value={website} />
+      </View>
+    </View>
+  </TouchableOpacity>
 );
 
 const Users = ({ users, selectUser }) => (
-  <div style={style.users}>
-    <div>
+  <View style={style.users}>
+    <View>
       {users.map(({ id, name, website }) => (
-        <UsersItem key={id} id={id} name={name} website={website} selectUser={selectUser}/>
+        <UsersItem key={id} id={id} name={name} website={website} selectUser={selectUser} />
       ))}
-    </div>
-  </div>
+    </View>
+  </View>
 );
 
 export default Users;

@@ -1,6 +1,14 @@
-/** Created by batmah on 19.10.16 */
+/**
+ * Created by batmah on 23.09.16.
+ */
+'use strict';
 import React, { Component } from 'react';
-import axios from 'axios';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView
+} from 'react-native';
 
 import Users from './Users';
 import User from './User';
@@ -20,12 +28,11 @@ class App extends Component {
   }
 
   componentWillMount() {
-    // получаем данные при загрузке
-    axios.get('https://jsonplaceholder.typicode.com/users')
-      // в случае успеха меняем состояние приложения
-      .then((response) => this.setState({ users: response.data }))
-      // в случае ошибки пишем информацию в консоль
-      .catch((errror) => console.error(errror))
+    //e178d1d9.ngrok.io
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => {alert(response.json);return response.json()})
+      .then(json => {alert(JSON.stringify(json));this.setState({ users: json })})
+      .catch((err) => alert('service jsonplaceholder.typicode.com not work'))
   }
 
   selectUser(id){
@@ -44,7 +51,7 @@ class App extends Component {
     // клонируем массив
     const users = this.state.users.slice();
     // меняем параметры в новой копии в стиле ES6
-    users[index] = Object.assign({},users[index],{[key]: value});
+    users[index][key] = value;
     // присваеваем новый массив с измененными данными
     this.setState({users});
   }
@@ -54,16 +61,19 @@ class App extends Component {
     if (!this.state.users) {
       // если нет данных о пользователях
       return (
-        <div>
-          Loading...
-        </div>
+        <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+          <Text> Loading...</Text>
+        </View>
       )
     }
 
     if (!this.state.userId) {
       // если есть данные, но пользователь не выбран
       return (
-        <Users users={this.state.users} selectUser={this.selectUser}/>
+        <ScrollView>
+          <Users users={this.state.users} selectUser={this.selectUser} />
+          <Users users={this.state.users} selectUser={this.selectUser} />
+        </ScrollView>
       )
     }
 
@@ -73,7 +83,9 @@ class App extends Component {
     const user = this.state.users.find(user => user.id === this.state.userId);
 
     return (
-      <User user={user} selectUser={this.selectUser} changeInfo={this.changeInfo}/>
+      <ScrollView>
+        <User user={user} selectUser={this.selectUser} changeInfo={this.changeInfo} />
+      </ScrollView>
     )
 
   }

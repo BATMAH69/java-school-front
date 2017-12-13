@@ -2,11 +2,16 @@
  * Created by batmah on 19.10.16.
  */
 import React from 'react';
-import axios from 'axios';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  TextInput
+} from 'react-native';
 
-const style = {
+const style = StyleSheet.create({
   card: {
-    display: 'flex',
     alignItems: 'center',
     flexDirection: 'column'
   },
@@ -14,67 +19,66 @@ const style = {
     margin: 5,
     height: 100,
     width: 100,
-    display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'gold',
-    borderRadius: '50%',
-    fontSize: 48
+    borderRadius: 50,
   },
   column: {
-    display: 'flex',
     flexDirection: 'column'
   },
   row: {
     margin: 5,
-    display: 'flex',
+    alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row'
   },
   description: {
-    width: 70,
-    color: 'gray'
+    width: 70
   },
-  buttons:{
-    display: 'flex',
+  input: {
+    width: 150
+  },
+  buttons: {
+    flexDirection: 'row',
     justifyContent: 'center',
   },
-  button:{
-    margin: 5
+  button: {
+    margin: 10
   }
-};
+});
 
-const Button = ({onClick, children}) => (
-  <button style={style.button} onClick={onClick}>
-    {children}
-  </button>
+const Button = ({ onClick, children }) => (
+  <View>
+    <TouchableOpacity onPress={onClick}>
+      <Text style={style.button}>{ children }</Text>
+    </TouchableOpacity>
+  </View>
 );
 
 const UsersInfoRow = ({ description, value, changeInfo }) => (
-  <div style={style.row}>
-    <div style={style.description}>{description}:</div>
-    <input
+  <View style={style.row}>
+    <Text style={style.description}>{description}:</Text>
+    <TextInput
+      style={style.input}
       value={value}
-      onChange={(e) => changeInfo(description, e.target.value)}
+      onChangeText={(value) => changeInfo(description, value)}
     />
-  </div>
+  </View>
 );
 
 const sendUser = (user) => {
-  // отсылаем изменения на сервер
-  axios.post('https://jsonplaceholder.typicode.com/posts', {user})
-    // при успехе показать всплывающее окно
-    .then((responce) => alert(JSON.stringify(responce.data)))
-    // при неудаче ошибку в консоль
-    .catch((error) => console.error(error))
+  fetch('https://jsonplaceholder.typicode.com/posts',{ method: "POST",})
+    .then(responce => responce.json())
+    .then(json => alert(JSON.stringify(json.data)))
+    .catch((err) => alert('service jsonplaceholder.typicode.com not work'))
 };
 
 const User = ({ user, changeInfo, selectUser }) => (
-  <div style={style.card}>
-    <div style={style.icon}>{user.name[0]}</div>
-    <div style={style.column}>
+  <View style={style.card}>
+    <View style={style.icon}><Text>{user.name[0]}</Text></View>
+    <View style={style.column}>
       {
-        // Выбирает все текстовые поля первого уровня вложености и делает из них редактируемые
         Object.keys(user)
           .filter(key  => typeof user[key] === 'string')
           .map((key) => (
@@ -87,14 +91,14 @@ const User = ({ user, changeInfo, selectUser }) => (
             />
           ))
       }
-    </div>
-    <div style={style.buttons}>
+    </View>
+    <View style={style.buttons}>
       <Button onClick={() => selectUser(user.id - 1)}>{'<-'}</Button>
       <Button onClick={() => selectUser(0)}>Список</Button>
       <Button onClick={() => sendUser(user)}>Отправить</Button>
       <Button onClick={() => selectUser(user.id + 1)}>{'->'}</Button>
-    </div>
-  </div>
+    </View>
+  </View>
 );
 
 export default User;
