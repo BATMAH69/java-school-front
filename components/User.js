@@ -7,7 +7,9 @@ import axios from 'axios';
 const style = {
   card: {
     display: 'flex',
+    flex:1,
     alignItems: 'center',
+    justifyContent: 'center',
     flexDirection: 'column'
   },
   icon: {
@@ -18,7 +20,9 @@ const style = {
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'gold',
-    borderRadius: '50%',
+    borderRadius: 100 / 2,
+  },
+  iconText: {
     fontSize: 48
   },
   column: {
@@ -28,6 +32,7 @@ const style = {
   row: {
     margin: 5,
     display: 'flex',
+    alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row'
   },
@@ -38,21 +43,24 @@ const style = {
   buttons:{
     display: 'flex',
     justifyContent: 'center',
+    flexDirection: 'row',
   },
   button:{
-    margin: 5
+    margin: 10
   }
 };
 
 const Button = ({onClick, children}) => (
-  <button style={style.button} onClick={onClick}>
-    {children}
-  </button>
+  <div>
+    <div onClick={onClick}>
+      <span style={style.button}>{ children }</span>
+    </div>
+  </div>
 );
 
 const UsersInfoRow = ({ description, value, changeInfo }) => (
   <div style={style.row}>
-    <div style={style.description}>{description}:</div>
+    <div style={style.description}><span>{description}:</span></div>
     <input
       value={value}
       onChange={(e) => changeInfo(description, e.target.value)}
@@ -71,7 +79,7 @@ const sendUser = (user) => {
 
 const User = ({ user, changeInfo, selectUser }) => (
   <div style={style.card}>
-    <div style={style.icon}>{user.name[0]}</div>
+    <div style={style.icon}><span style={style.iconText}>{user.name[0]}</span></div>
     <div style={style.column}>
       {
         // Выбирает все текстовые поля первого уровня вложености и делает из них редактируемые
@@ -89,10 +97,10 @@ const User = ({ user, changeInfo, selectUser }) => (
       }
     </div>
     <div style={style.buttons}>
-      <Button onClick={() => selectUser(user.id - 1)}>{'<-'}</Button>
+      <Button onClick={() => selectUser(user.id - 1)}>{'←'}</Button>
       <Button onClick={() => selectUser(0)}>Список</Button>
       <Button onClick={() => sendUser(user)}>Отправить</Button>
-      <Button onClick={() => selectUser(user.id + 1)}>{'->'}</Button>
+      <Button onClick={() => selectUser(user.id + 1)}>{'→'}</Button>
     </div>
   </div>
 );

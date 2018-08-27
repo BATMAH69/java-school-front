@@ -7,10 +7,12 @@ const style = {
   users:{
     display: 'flex',
     justifyContent: 'center',
+    alignItems:'center',
   },
   card: {
     margin:10,
-    display: 'flex'
+    display: 'flex',
+    flexDirection: 'row'
   },
   icon: {
     marginRight: 10,
@@ -44,7 +46,7 @@ const UsersItemRow = ({ description, value }) => (
 );
 
 const UsersItem = ({ id, name, website, selectUser }) => (
-  <div style={style.card} onClick={() => selectUser(id)}>
+  <div onClick={() => selectUser(id)} style={style.card}>
     <div style={style.icon}>{name[0]}</div>
     <div style={style.column}>
       <UsersItemRow description="name" value={name} />

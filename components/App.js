@@ -7,6 +7,15 @@ import User from './User';
 
 // import './style.css'
 
+const styles = {
+  loading: {
+    flex:1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  layout: {},
+};
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -54,8 +63,8 @@ class App extends Component {
     if (!this.state.users) {
       // если нет данных о пользователях
       return (
-        <div>
-          Loading...
+        <div style={styles.loading}>
+          <span>Loading...</span>
         </div>
       )
     }
@@ -63,7 +72,9 @@ class App extends Component {
     if (!this.state.userId) {
       // если есть данные, но пользователь не выбран
       return (
-        <Users users={this.state.users} selectUser={this.selectUser}/>
+        <div style={styles.layout}>
+          <Users users={this.state.users} selectUser={this.selectUser}/>
+        </div>
       )
     }
 
@@ -73,7 +84,9 @@ class App extends Component {
     const user = this.state.users.find(user => user.id === this.state.userId);
 
     return (
-      <User user={user} selectUser={this.selectUser} changeInfo={this.changeInfo}/>
+      <div style={styles.layout}>
+        <User user={user} selectUser={this.selectUser} changeInfo={this.changeInfo}/>
+      </div>
     )
 
   }
