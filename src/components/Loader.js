@@ -1,7 +1,7 @@
 /** Created by batmah on 19.10.16 */
 import React, { Component } from 'react';
+import { ScrollView, TouchableOpacity, View, Text, TextInput } from 'react-native'
 
-// import './style.css'
 
 const styles = {
   loading: {
@@ -12,9 +12,9 @@ const styles = {
 };
 
 const Loader = () => (
-  <div style={styles.loading}>
-    <span>Loading...</span>
-  </div>
+  <View style={styles.loading}>
+    <Text>Loading...</Text>
+  </View>
 );
 
 export default Loader;

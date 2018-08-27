@@ -1,11 +1,9 @@
 /** Created by batmah on 19.10.16 */
 import React, { Component } from 'react';
-
+import { ScrollView, TouchableOpacity, View, Text, TextInput } from 'react-native'
 import Users from './screens/Users';
 import User from './screens/User';
 import Loader from './components/Loader';
-
-// import './style.css'
 
 const styles = {
   layout: {},
@@ -64,9 +62,9 @@ class App extends Component {
     if (!this.state.userId) {
       // если есть данные, но пользователь не выбран
       return (
-        <div style={styles.layout}>
+        <ScrollView style={styles.layout}>
           <Users users={this.state.users} selectUser={this.selectUser}/>
-        </div>
+        </ScrollView>
       )
     }
 
@@ -76,9 +74,9 @@ class App extends Component {
     const user = this.state.users.find(user => user.id === this.state.userId);
 
     return (
-      <div style={styles.layout}>
+      <ScrollView style={styles.layout}>
         <User user={user} selectUser={this.selectUser} changeInfo={this.changeInfo}/>
-      </div>
+      </ScrollView>
     )
 
   }

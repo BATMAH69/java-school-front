@@ -2,6 +2,7 @@
  * Created by batmah on 19.10.16.
  */
 import React from 'react';
+import { ScrollView, TouchableOpacity, View, Text, TextInput } from 'react-native'
 
 const style = {
   users:{
@@ -34,35 +35,34 @@ const style = {
   },
   description: {
     width: 50,
-    color: 'gray'
   }
 };
 
 const UsersItemRow = ({ description, value }) => (
-  <div style={style.row}>
-    <div style={style.description}><span>{description}:</span></div>
-    <div><span>{value}</span></div>
-  </div>
+  <View style={style.row}>
+    <View style={style.description}><Text>{description}:</Text></View>
+    <View><Text>{value}</Text></View>
+  </View>
 );
 
 const UsersItem = ({ id, name, website, selectUser }) => (
-  <div onClick={() => selectUser(id)} style={style.card}>
-    <div style={style.icon}><span>{name[0]}</span></div>
-    <div style={style.column}>
+  <TouchableOpacity onPress={() => selectUser(id)} style={style.card}>
+    <View style={style.icon}><Text>{name[0]}</Text></View>
+    <View style={style.column}>
       <UsersItemRow description="name" value={name} />
       <UsersItemRow description="www" value={website} />
-    </div>
-  </div>
+    </View>
+  </TouchableOpacity>
 );
 
 const Users = ({ users, selectUser }) => (
-  <div style={style.users}>
-    <div>
+  <View style={style.users}>
+    <View>
       {users.map(({ id, name, website }) => (
         <UsersItem key={id} id={id} name={name} website={website} selectUser={selectUser}/>
       ))}
-    </div>
-  </div>
+    </View>
+  </View>
 );
 
 export default Users;

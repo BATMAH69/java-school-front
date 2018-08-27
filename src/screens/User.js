@@ -2,6 +2,7 @@
  * Created by batmah on 19.10.16.
  */
 import React from 'react';
+import { ScrollView, TouchableOpacity, View, Text, TextInput } from 'react-native'
 
 const style = {
   card: {
@@ -37,7 +38,6 @@ const style = {
   },
   description: {
     width: 70,
-    color: 'gray'
   },
   buttons:{
     display: 'flex',
@@ -50,21 +50,21 @@ const style = {
 };
 
 const Button = ({onClick, children}) => (
-  <div>
-    <div onClick={onClick}>
-      <span style={style.button}>{ children }</span>
-    </div>
-  </div>
+  <View>
+    <TouchableOpacity onPress={onClick}>
+      <Text style={style.button}>{ children }</Text>
+    </TouchableOpacity>
+  </View>
 );
 
 const UsersInfoRow = ({ description, value, changeInfo }) => (
-  <div style={style.row}>
-    <div style={style.description}><span>{description}:</span></div>
-    <input
+  <View style={style.row}>
+    <View style={style.description}><Text>{description}:</Text></View>
+    <TextInput
       value={value}
-      onChange={(e) => changeInfo(description, e.target.value)}
+      onChangeText={(value) => changeInfo(description, value)}
     />
-  </div>
+  </View>
 );
 
 const sendUser = (user) => {
@@ -78,11 +78,10 @@ const sendUser = (user) => {
 };
 
 const User = ({ user, changeInfo, selectUser }) => (
-  <div style={style.card}>
-    <div style={style.icon}><span style={style.iconText}>{user.name[0]}</span></div>
-    <div style={style.column}>
+  <View style={style.card}>
+    <View style={style.icon}><Text style={style.iconText}>{user.name[0]}</Text></View>
+    <View style={style.column}>
       {
-        // Выбирает все текстовые поля первого уровня вложености и делает из них редактируемые
         Object.keys(user)
           .filter(key  => typeof user[key] === 'string')
           .map((key) => (
@@ -95,14 +94,15 @@ const User = ({ user, changeInfo, selectUser }) => (
             />
           ))
       }
-    </div>
-    <div style={style.buttons}>
+
+    </View>
+    <View style={style.buttons}>
       <Button onClick={() => selectUser(user.id - 1)}>{'←'}</Button>
       <Button onClick={() => selectUser(0)}>Список</Button>
       <Button onClick={() => sendUser(user)}>Отправить</Button>
       <Button onClick={() => selectUser(user.id + 1)}>{'→'}</Button>
-    </div>
-  </div>
+    </View>
+  </View>
 );
 
 export default User;
