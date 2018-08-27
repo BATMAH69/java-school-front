@@ -1,17 +1,13 @@
 /** Created by batmah on 19.10.16 */
 import React, { Component } from 'react';
 
-import Users from './Users';
-import User from './User';
+import Users from './screens/Users';
+import User from './screens/User';
+import Loader from './components/Loader';
 
 // import './style.css'
 
 const styles = {
-  loading: {
-    flex:1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   layout: {},
 };
 
@@ -62,11 +58,7 @@ class App extends Component {
     console.log(this.state.users);
     if (!this.state.users) {
       // если нет данных о пользователях
-      return (
-        <div style={styles.loading}>
-          <span>Loading...</span>
-        </div>
-      )
+      return <Loader />
     }
 
     if (!this.state.userId) {
