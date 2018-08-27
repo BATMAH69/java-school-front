@@ -2,7 +2,6 @@
  * Created by batmah on 19.10.16.
  */
 import React from 'react';
-import axios from 'axios';
 
 const style = {
   card: {
@@ -70,11 +69,12 @@ const UsersInfoRow = ({ description, value, changeInfo }) => (
 
 const sendUser = (user) => {
   // отсылаем изменения на сервер
-  axios.post('https://jsonplaceholder.typicode.com/posts', {user})
+  fetch('https://jsonplaceholder.typicode.com/posts',{ method: "POST",})
+    .then(responce => responce.json())
     // при успехе показать всплывающее окно
-    .then((responce) => alert(JSON.stringify(responce.data)))
+    .then(json => alert(JSON.stringify(json)))
     // при неудаче ошибку в консоль
-    .catch((error) => console.error(error))
+    .catch((err) => alert('service jsonplaceholder.typicode.com not work'))
 };
 
 const User = ({ user, changeInfo, selectUser }) => (

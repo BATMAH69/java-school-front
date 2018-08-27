@@ -1,6 +1,5 @@
 /** Created by batmah on 19.10.16 */
 import React, { Component } from 'react';
-import axios from 'axios';
 
 import Users from './Users';
 import User from './User';
@@ -30,11 +29,12 @@ class App extends Component {
 
   componentWillMount() {
     // получаем данные при загрузке
-    axios.get('https://jsonplaceholder.typicode.com/users')
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => response.json())
       // в случае успеха меняем состояние приложения
-      .then((response) => this.setState({ users: response.data }))
-      // в случае ошибки пишем информацию в консоль
-      .catch((errror) => console.error(errror))
+      .then(json => this.setState({ users: json }))
+      // в случае ошибки пишем информацию на экран
+      .catch((err) => alert('service jsonplaceholder.typicode.com not work'))
   }
 
   selectUser(id){
