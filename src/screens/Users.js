@@ -40,14 +40,14 @@ const style = {
 
 const UsersItemRow = ({ description, value }) => (
   <div style={style.row}>
-    <div style={style.description}>{description}:</div>
-    <div>{value}</div>
+    <div style={style.description}><span>{description}:</span></div>
+    <div><span>{value}</span></div>
   </div>
 );
 
 const UsersItem = ({ id, name, website, selectUser }) => (
   <div onClick={() => selectUser(id)} style={style.card}>
-    <div style={style.icon}>{name[0]}</div>
+    <div style={style.icon}><span>{name[0]}</span></div>
     <div style={style.column}>
       <UsersItemRow description="name" value={name} />
       <UsersItemRow description="www" value={website} />
