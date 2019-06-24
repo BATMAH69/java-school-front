@@ -1,27 +1,56 @@
 import React, { Component } from 'react';
-import { string } from 'prop-types'
+import { string, func } from 'prop-types'
 
+const Widget = (props) => (
+  <div>
+    <div>Hi {props.target} {props.message}</div>
+    <input onChange={props.handlerUpdate} />
+  </div>
+);
+
+Widget.propTypes = {
+  target: string.isRequired,
+  message: string.isRequired,
+  handlerUpdate: func.isRequired
+};
+
+Widget.defaultProps = {
+  target: 'world'
+};
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      count: 0
+      text: ''
     };
     this.update = this.update.bind(this);
   }
 
   update(e) {
-    this.setState({ count: e.target.value })
+    this.setState({ text: e.target.value })
   }
 
   render() {
     return (
       <div>
-        <div>Hi {this.props.target} {this.state.count}</div>
-        <input onChange={this.update} />
+        <Widget
+          target={this.props.target}
+          message={this.state.text}
+          handlerUpdate={this.update}
+        />
+        <Widget
+          target={this.props.target}
+          message={this.state.text}
+          handlerUpdate={this.update}
+        />
+        <Widget
+          target={this.props.target}
+          message={this.state.text}
+          handlerUpdate={this.update}
+        />
       </div>
-    )
+    );
   }
 }
 
