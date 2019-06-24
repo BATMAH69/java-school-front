@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { string, func } from 'prop-types'
+import { string, func, node } from 'prop-types'
 
-const Widget = ({ target, message, handlerUpdate }) => (
+const Widget = ({ handlerUpdate, children }) => (
   <div>
-    <div>Hi {target} {message}</div>
+    {children}
     <input onChange={handlerUpdate} />
   </div>
 );
 
 Widget.propTypes = {
-  target: string.isRequired,
-  message: string.isRequired,
-  handlerUpdate: func.isRequired
+  handlerUpdate: func.isRequired,
+  children: node.isRequired
 };
 
 Widget.defaultProps = {
@@ -31,7 +30,6 @@ class App extends Component {
   }
 
   update(e) {
-    console.log();
     this.setState({
       text: e.target.value,
       width: ReactDOM.findDOMNode(this.widgetRef.current).offsetWidth
@@ -42,10 +40,10 @@ class App extends Component {
     return (
       <div ref={this.widgetRef} style={{ display: 'inline-block' }}>
         <Widget
-          target={this.props.target}
-          message={this.state.text}
           handlerUpdate={this.update}
-        />
+        >
+          <div>Hi {this.props.target} {this.state.text}</div>
+        </Widget>
         <div>{this.state.width}</div>
       </div>
     );
