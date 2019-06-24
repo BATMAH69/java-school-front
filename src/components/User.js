@@ -48,6 +48,14 @@ const UsersInfoRow = ({ description, value, changeInfo }) => (
   </div>
 );
 
+const sendUser = (user) => {
+  fetch('https://jsonplaceholder.typicode.com/posts', {method:'post'})
+    .then(response => response.json())
+    .then(response => alert(JSON.stringify(response)))
+    .catch((err) => console.error(err))
+};
+
+
 const User = ({ user, changeInfo, selectUser }) => (
   <div style={style.card}>
     <div style={style.icon}>{user.name[0]}</div>
@@ -68,7 +76,7 @@ const User = ({ user, changeInfo, selectUser }) => (
     </div>
     <div style={style.buttons}>
       <button onClick={() => selectUser(0)}>Назад</button>
-      <button>Отправить</button>
+      <button onClick={() => sendUser(user)}>Отправить</button>
     </div>
   </div>
 );
