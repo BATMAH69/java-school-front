@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 
 const style = {
   card: {
+    margin:10,
     display: 'flex'
   },
   icon: {
@@ -29,19 +30,19 @@ const style = {
   }
 };
 
+const UsersItemRow = ({ description, value }) => (
+  <div style={style.row}>
+    <div style={style.description}>{description}:</div>
+    <div>{value}</div>
+  </div>
+);
 
 const UsersItem = ({ id, name, website }) => (
   <div style={style.card} key={id}>
     <div style={style.icon}>{name[0]}</div>
     <div style={style.column}>
-      <div style={style.row}>
-        <div style={style.description}>name:</div>
-        <div>{name}</div>
-      </div>
-      <div style={style.row}>
-        <div style={style.description}>www:</div>
-        <div>{website}</div>
-      </div>
+      <UsersItemRow description="name" value={name} />
+      <UsersItemRow description="www" value={website} />
     </div>
   </div>
 );
