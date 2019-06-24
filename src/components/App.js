@@ -18,9 +18,29 @@ class App extends Component {
 
 
   render() {
+    console.log(this.state.users);
+    if (!this.state.users){
+      return (
+        <div>
+          Loading...
+        </div>
+      )
+    }
+
     return (
       <div>
-        Loading...
+        {this.state.users.map(({id, name, website}) => (
+          <div key={id}>
+            <div>
+              <div>name:</div>
+              <div>{name}</div>
+            </div>
+            <div>
+              <div>www:</div>
+              <div>{website}</div>
+            </div>
+          </div>
+        ))}
       </div>
     )
   }
