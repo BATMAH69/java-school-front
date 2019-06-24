@@ -13,6 +13,8 @@ class App extends Component {
       userId: 1,
       users: null
     };
+    this.selectUser = this.selectUser.bind(this)
+    this.changeInfo = this.changeInfo.bind(this)
   }
 
   componentWillMount() {
@@ -26,6 +28,13 @@ class App extends Component {
     this.setState({userId});
   }
 
+  changeInfo(key, value) {
+    const index = this.state.users.findIndex(user => user.id === this.state.userId)
+    const users = this.state.users.slice();
+    users[index][key] = value;
+    this.setState({users});
+  }
+  
   render() {
     console.log(this.state.users);
     if (!this.state.users){
@@ -38,14 +47,14 @@ class App extends Component {
 
     if (!this.state.userId) {
       return (
-        <Users users={this.state.users}/>
+        <Users users={this.state.users} selectUser={this.selectUser}/>
       )
     }
 
     const user = this.state.users.find(user => user.id === this.state.userId);
 
     return (
-      <User user={user}/>
+      <User user={user} selectUser={this.selectUser} changeInfo={this.changeInfo}/>
     )
   }
 }
