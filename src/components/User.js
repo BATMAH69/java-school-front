@@ -49,7 +49,8 @@ const UsersInfoRow = ({ description, value, changeInfo }) => (
 );
 
 const sendUser = (user) => {
-  fetch('https://jsonplaceholder.typicode.com/posts', {method:'post'})
+  const options = {method:'post', body: JSON.stringify(user)};
+  fetch('https://jsonplaceholder.typicode.com/posts', options)
     .then(response => response.json())
     .then(response => alert(JSON.stringify(response)))
     .catch((err) => console.error(err))
