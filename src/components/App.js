@@ -55,6 +55,13 @@ class App extends Component {
     return nextState.text !== '777';
   }
 
+  componentDidMount() {
+    const root = 'https://jsonplaceholder.typicode.com';
+    fetch(root + '/posts/1')
+      .then(response => response.json())
+      .then(response => this.setState({ text: response.data.title }));
+  }
+
   update(e) {
     console.log();
     this.setState({
