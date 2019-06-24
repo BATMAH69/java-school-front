@@ -23,9 +23,13 @@ class App extends Component {
       .then(users => this.setState({users}))
       .catch(err => alert(`Всё плохо ${err}`))
   }
-  
-  selectUser(userId){
-    this.setState({userId});
+
+  selectUser(id){
+    let userId = id;
+    if (userId > this.state.users.length){
+      userId = 0;
+    }
+    this.setState({ userId });
   }
 
   changeInfo(key, value) {
