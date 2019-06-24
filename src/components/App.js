@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { string, func } from 'prop-types'
 
+const ThemeContext = React.createContext('light');
+
 class Widget extends Component {
   constructor(props) {
     super(props);
@@ -32,9 +34,13 @@ Widget.defaultProps = {
 
 function greenHOC(WrappedComponent) {
   return (props) => (
-    <div style={{backgroundColor: props.background}}>
-      <WrappedComponent {...props}/>
-    </div>
+    <ThemeContext.Consumer>
+      {theme => (
+        <div style={{backgroundColor: theme === 'light'?'whitesmoke':props.background}}>
+          <WrappedComponent {...props}/>
+        </div>
+      )}
+    </ThemeContext.Consumer>
   )
 }
 
@@ -45,7 +51,8 @@ class App extends Component {
     super(props);
     this.state = {
       text: '',
-      width: 0
+      width: 0,
+      theme: 'light',
     };
     this.update = this.update.bind(this);
     this.widgetRef = React.createRef();
@@ -59,7 +66,7 @@ class App extends Component {
     const root = 'https://jsonplaceholder.typicode.com';
     fetch(root + '/posts/1')
       .then(response => response.json())
-      .then(response => this.setState({ text: response.data.title }));
+      .then(response => this.setState({ text: response.title }));
   }
 
   update(e) {
@@ -77,19 +84,21 @@ class App extends Component {
     const colors = ['tomato','lightgreen','deepskyblue'];
 
     return (
-      <div ref={this.widgetRef}>
-        {
-          colors.map((item) => (
-            <Widget
-              key={item}
-              background={item}
-              target={this.props.target}
-              message={this.state.text}
-              handlerUpdate={this.update}
-            />
-          ))
-        }
-      </div>
+      <ThemeContext.Provider value={this.state.theme}>
+        <div ref={this.widgetRef}>
+          {
+            colors.map((item) => (
+              <Widget
+                key={item}
+                background={item}
+                target={this.props.target}
+                message={this.state.text}
+                handlerUpdate={this.update}
+              />
+            ))
+          }
+        </div>
+      </ThemeContext.Provider>
     );
   }
 }
