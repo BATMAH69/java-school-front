@@ -10,7 +10,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: 1,
+      userId: 0,
       users: null
     };
     this.selectUser = this.selectUser.bind(this)

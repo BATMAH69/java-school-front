@@ -4,6 +4,10 @@
 import React from 'react';
 
 const style = {
+  users:{
+    display: 'flex',
+    justifyContent: 'center',
+  },
   card: {
     margin:10,
     display: 'flex'
@@ -51,10 +55,12 @@ const UsersItem = ({ id, name, website, selectUser }) => (
 );
 
 const Users = ({ users, selectUser }) => (
-  <div>
-    {users.map(({ id, name, website }) => (
-      <UsersItem key={id} id={id} name={name} website={website} selectUser={selectUser}/>
-    ))}
+  <div style={style.users}>
+    <div>
+      {users.map(({ id, name, website }) => (
+        <UsersItem key={id} id={id} name={name} website={website} selectUser={selectUser}/>
+      ))}
+    </div>
   </div>
 );
 
