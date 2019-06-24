@@ -1,5 +1,51 @@
 import React, { Component } from 'react';
 
+// import './style.css'
+
+const style = {
+  card: {
+    display: 'flex'
+  },
+  icon: {
+    marginRight: 10,
+    height: 40,
+    width: 40,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'gold',
+    borderRadius: 20
+  },
+  column: {
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  row: {
+    display: 'flex',
+    flexDirection: 'row'
+  },
+  description:{
+    width: 50
+  }
+};
+
+
+const UsersItem = ({ id, name, website }) => (
+  <div style={style.card} key={id}>
+    <div style={style.icon}>{name[0]}</div>
+    <div style={style.column}>
+      <div style={style.row}>
+        <div style={style.description}>name:</div>
+        <div>{name}</div>
+      </div>
+      <div style={style.row}>
+        <div style={style.description}>www:</div>
+        <div>{website}</div>
+      </div>
+    </div>
+  </div>
+);
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -30,16 +76,7 @@ class App extends Component {
     return (
       <div>
         {this.state.users.map(({id, name, website}) => (
-          <div key={id}>
-            <div>
-              <div>name:</div>
-              <div>{name}</div>
-            </div>
-            <div>
-              <div>www:</div>
-              <div>{website}</div>
-            </div>
-          </div>
+          <UsersItem key={id} name={name} website={website} />
         ))}
       </div>
     )
