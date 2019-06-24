@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { string, func, node } from 'prop-types'
+import { string, func } from 'prop-types'
 
 class Widget extends Component {
   constructor(props) {
@@ -10,26 +10,6 @@ class Widget extends Component {
     }
   }
 
-  componentDidMount() {
-    console.log('componentDidMount')
-  }
-
-  componentDidUpdate() {
-    console.log('componentDidUpdate')
-  }
-
-  componentWillUnmount() {
-    console.log('componentDidUnmount')
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (+nextProps.message < +prevState.message) {
-      console.log('getDerivedStateFromProps true');
-      return null;
-    }
-    console.log('getDerivedStateFromProps false');
-    return { message: nextProps.message };
-  }
   render() {
     return (
       <div>
@@ -40,7 +20,6 @@ class Widget extends Component {
   }
 }
 
-
 Widget.propTypes = {
   target: string.isRequired,
   message: string.isRequired,
@@ -50,6 +29,16 @@ Widget.propTypes = {
 Widget.defaultProps = {
   target: 'world'
 };
+
+function greenHOC(WrappedComponent) {
+  return (props) => (
+    <div style={{backgroundColor: 'green'}}>
+      <WrappedComponent {...props}/>
+    </div>
+  )
+}
+
+Widget = greenHOC(Widget);
 
 class App extends Component {
   constructor(props) {
