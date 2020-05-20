@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import { string, func } from 'prop-types'
 
@@ -19,38 +19,27 @@ Widget.defaultProps = {
   target: 'world'
 };
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      text: '',
-      width: 0
-    };
-    this.update = this.update.bind(this);
-    this.widgetRef = React.createRef();
-  }
+const App = (props) => {
+  const [text, setText] = useState('');
+  const [width, setWidth] = useState('');
+  const widgetRef = useRef(null);
 
-  update(e) {
-    console.log();
-    this.setState({
-      text: e.target.value,
-      width: ReactDOM.findDOMNode(this.widgetRef.current).offsetWidth
-    })
-  }
+  const update = (e) => {
+    setText(e.target.value);
+    setWidth(ReactDOM.findDOMNode(widgetRef.current).offsetWidth)
+  };
 
-  render() {
-    return (
-      <div ref={this.widgetRef} style={{ display: 'inline-block' }}>
-        <Widget
-          target={this.props.target}
-          message={this.state.text}
-          handlerUpdate={this.update}
-        />
-        <div>{this.state.width}</div>
-      </div>
-    );
-  }
-}
+  return (
+    <div ref={widgetRef} style={{ display: 'inline-block' }}>
+      <Widget
+        target={props.target}
+        message={text}
+        handlerUpdate={update}
+      />
+      <div>{width}</div>
+    </div>
+  );
+};
 
 App.propTypes = {
   target: string.isRequired
