@@ -1,26 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component, useContext } from 'react';
 import ReactDOM from 'react-dom';
 import { string, func } from 'prop-types'
 
 const ThemeContext = React.createContext('light');
 
-class Widget extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      message: props.message
-    }
-  }
-
-  render() {
-    return (
+const Widget = (props) => {
+  const theme =useContext(ThemeContext);
+  return (
+    <div style={{backgroundColor: theme === 'light' ? 'whitesmoke' : props.background}}>
       <div>
-        <div>Hi {this.props.target} {this.state.message}</div>
-        <input onChange={this.props.handlerUpdate} />
+        <div>Hi {props.target} {props.message}</div>
+        <input onChange={props.handlerUpdate} />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 Widget.propTypes = {
   target: string.isRequired,
@@ -31,20 +25,6 @@ Widget.propTypes = {
 Widget.defaultProps = {
   target: 'world'
 };
-
-function greenHOC(WrappedComponent) {
-  return (props) => (
-    <ThemeContext.Consumer>
-      {theme => (
-        <div style={{backgroundColor: theme === 'light'?'whitesmoke':props.background}}>
-          <WrappedComponent {...props}/>
-        </div>
-      )}
-    </ThemeContext.Consumer>
-  )
-}
-
-Widget = greenHOC(Widget);
 
 class App extends Component {
   constructor(props) {
