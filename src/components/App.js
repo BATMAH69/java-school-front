@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import Users from './Users';
 import User from './User';
 
@@ -6,61 +6,50 @@ import User from './User';
 
 const style = {};
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      userId: 0,
-      users: null
-    };
-    this.selectUser = this.selectUser.bind(this)
-    this.changeInfo = this.changeInfo.bind(this)
-  }
+const App  = () => {
+  const [users, setUsers] = useState(null);
+  const [userId, setUserId] = useState(0);
 
-  componentWillMount() {
+
+  const selectUser = (id) => {
+    setUserId((userId > users.length) ? 0 : id);
+  };
+
+  const changeInfo = (key, value) => {
+    const index = users.findIndex(user => user.id === userId);
+    const usersCopy = users.slice();
+    usersCopy[index][key] = value;
+    setUsers(usersCopy);
+  };
+
+  useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/users')
       .then(response => response.json())
-      .then(users => this.setState({users}))
+      .then(users => setUsers(users))
       .catch(err => alert(`Всё плохо ${err}`))
-  }
+  }, []);
 
-  selectUser(id){
-    let userId = id;
-    if (userId > this.state.users.length){
-      userId = 0;
-    }
-    this.setState({ userId });
-  }
 
-  changeInfo(key, value) {
-    const index = this.state.users.findIndex(user => user.id === this.state.userId)
-    const users = this.state.users.slice();
-    users[index][key] = value;
-    this.setState({users});
-  }
-  
-  render() {
-    console.log(this.state.users);
-    if (!this.state.users){
-      return (
-        <div>
-          Loading...
-        </div>
-      )
-    }
-
-    if (!this.state.userId) {
-      return (
-        <Users users={this.state.users} selectUser={this.selectUser}/>
-      )
-    }
-
-    const user = this.state.users.find(user => user.id === this.state.userId);
-
+  if (!users){
     return (
-      <User user={user} selectUser={this.selectUser} changeInfo={this.changeInfo}/>
+      <div>
+        Loading...
+      </div>
     )
   }
-}
+
+  if (!userId) {
+    return (
+      <Users users={users} selectUser={selectUser}/>
+    )
+  }
+
+  const user = users.find(user => user.id === userId);
+
+  return (
+    <User user={user} selectUser={selectUser} changeInfo={changeInfo}/>
+  )
+};
+
 
 export default App;
