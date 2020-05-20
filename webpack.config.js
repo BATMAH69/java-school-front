@@ -1,7 +1,7 @@
 module.exports = {
   entry: './main.js',
   output: {
-    path: './',
+    path: '/',
     filename: 'index.js'
   },
   devServer:{
@@ -9,8 +9,8 @@ module.exports = {
     port:3333
   },
   module:{
-    loaders:[
-      {test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel'}
+    rules:[
+      {test: /\.jsx?$/, exclude: /node_modules/, use: 'babel-loader'}
     ]
   }
 };
